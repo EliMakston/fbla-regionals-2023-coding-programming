@@ -1,5 +1,5 @@
 const fs = require('fs');
-const student = require('./students.js');
+const { Student, StudentsArr } = require('./students.js');
 
 // assumes: 
 //   json file is valid
@@ -13,7 +13,7 @@ module.exports.readFromJson = () => {
     let parsedData = JSON.parse(rawData);
     
     // create & return students arr
-    return [student.parsedJsonToArr(parsedData.students), parsedData.events];
+    return [StudentsArr.fromParsedJson(parsedData.students), parsedData.events];
 };
 
 // assumes: 
@@ -25,7 +25,7 @@ module.exports.readFromJson = () => {
 module.exports.writeToJson = (studentsArr, eventsArr) => {
     // parse arr as json
     let parsedData = {
-        students: student.arrToParsedJson(studentsArr),
+        students: studentsArr.toParsedJson(),
         events: eventsArr
     };
     let rawData = JSON.stringify(parsedData);
