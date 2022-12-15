@@ -78,12 +78,12 @@ module.exports.StudentsArr = class {
 
     // static 
     static fromParsedJson(parsedJsonArr) {
-        const newArr = [];
+        const newArr = new this();
         parsedJsonArr.forEach(jsonObj => {
-            let newStudent = new this.Student(jsonObj.firstName, jsonObj.lastName, jsonObj.gradeLvl);
+            let newStudent = new module.exports.Student(jsonObj.firstName, jsonObj.lastName, jsonObj.gradeLvl);
             newStudent.addPoints(jsonObj.points);
-            newArr.push(newObj);
+            newArr.push(newStudent);
         });
-        return new StudentsArr(newArr);
+        return newArr;
     }
 }
