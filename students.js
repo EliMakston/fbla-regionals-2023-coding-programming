@@ -1,3 +1,60 @@
+module.exports.Student = class {
+    // constructor
+    // assumes:
+    //   all the parameters are provided and not undefined
+    //   firstName: string
+    //   lastName: string 
+    //   gradeLvl: number (integers 9, 10, 11, or 12)
+    constructor(firstName, lastName, gradeLvl) {
+        this.#firstName = firstName;
+        this.#lastName = lastName;
+        this.#gradeLvl = gradeLvl;
+        this.#points = 0;
+    }
+
+    // getters
+    get firstName() {
+        return this.#firstName;
+    }
+    get lastName() {
+        return this.#lastName;
+    }
+    get gradeLvl() {
+        return this.#gradeLvl;
+    }
+    get points() {
+        return this.#points;
+    }
+
+    // helpers
+    // assumes:
+    //   pts is a number (int) and is positive
+    addPoints(pts) {
+        this.#points += pts;
+    }
+
+}
+
+module.exports.StudentsArr = class {
+    
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 // assumes:
 //   all the parameters are provided and not undefined
 //   firstName: string
@@ -27,7 +84,7 @@ module.exports.create = (firstName, lastName, gradeLvl) => {
             return this._points;
         },
 
-        // setters
+        // helper methods
         addPoints(pts) {
             this._points += pts;
         }

@@ -27,7 +27,7 @@ module.exports.test = () => {
     console.log(students);
     json.writeToJson(students);
 
-    let students2 = json.readFromJson();
+    let [students2, events] = json.readFromJson();
     console.log(students2);
 
     // console.log(my_student.getFirstName());

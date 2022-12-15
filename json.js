@@ -4,7 +4,7 @@ const student = require('./students.js');
 // assumes: 
 //   json file is valid
 // returns:
-//   array of student objects
+//   [array of student objects, array of event objects]
 // warnings:
 //   is syncronous
 module.exports.readFromJson = () => {
@@ -13,7 +13,7 @@ module.exports.readFromJson = () => {
     let parsedData = JSON.parse(rawData);
     
     // create & return students arr
-    return student.parsedJsonToArr(parsedData.students);
+    return [student.parsedJsonToArr(parsedData.students), parsedData.events];
 };
 
 // assumes: 
@@ -22,11 +22,12 @@ module.exports.readFromJson = () => {
 // warnings:
 //   is syncronous
 //   overwrites all existing data
-module.exports.writeToJson = (arr) => {
+module.exports.writeToJson = (studentsArr, eventsArr) => {
     // parse arr as json
     let parsedData = {
-        students: student.arrToParsedJson(arr)
-    }
+        students: student.arrToParsedJson(studentsArr),
+        events: eventsArr
+    };
     let rawData = JSON.stringify(parsedData);
 
     // write to file
