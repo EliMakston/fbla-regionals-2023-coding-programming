@@ -43,23 +43,23 @@ module.exports.EventsArr = class {
     // helper methods
     toParsedJson() {
         const parsedJsonArr = [];
-        this.#list.forEach(eventObj => {
-            let newObj = {
+        this.list.forEach(eventObj => {
+            let jsonObj = {
                 name: eventObj.name,
                 points: eventObj.points
             };
-            parsedJsonArr.push(newObj);
+            parsedJsonArr.push(jsonObj);
         });
         return parsedJsonArr;
     }
 
     // static methods
     static fromParsedJson(parsedJsonArr) {
-        const newArr = new this();
+        const eventsArr = new this();
         parsedJsonArr.forEach(jsonObj => {
-            let newEvent = new module.exports.Event(jsonObj.name, jsonObj.points);
-            newArr.push(newEvent);
+            let eventObj = new module.exports.Event(jsonObj.name, jsonObj.points);
+            eventsArr.push(eventObj);
         });
-        return newArr;
+        return eventsArr;
     }
 }

@@ -11,11 +11,11 @@ module.exports.Student = class {
     //   firstName: string
     //   lastName: string 
     //   gradeLvl: number (integers 9, 10, 11, or 12)
-    constructor(firstName, lastName, gradeLvl) {
+    constructor(firstName, lastName, gradeLvl, points) {
         this.#firstName = firstName;
         this.#lastName = lastName;
         this.#gradeLvl = gradeLvl;
-        this.#points = 0;
+        this.#points = points;
     }
 
     // getters
@@ -32,21 +32,19 @@ module.exports.Student = class {
         return this.#points;
     }
 
-    // helpers
+    // modifiers
     // assumes:
     //   pts is a number (int) and is positive
     addPoints(pts) {
         this.#points += pts;
     }
-
 }
 
 module.exports.StudentsArr = class {
+    // private fields
     #list;
     
     // constructor
-    // assumes:
-    //   arr is an  array of student objects
     constructor() {
         this.#list = [];
     }
@@ -64,26 +62,25 @@ module.exports.StudentsArr = class {
     // helper methods
     toParsedJson() {
         const parsedJsonArr = [];
-        this.#list.forEach(studentObj => {
-            let newObj = {
+        this.list.forEach(studentObj => {
+            let jsonObj = {
                 firstName: studentObj.firstName,
                 lastName: studentObj.lastName,
                 gradeLvl: studentObj.gradeLvl,
                 points: studentObj.points
             };
-            parsedJsonArr.push(newObj);
+            parsedJsonArr.push(jsonObj);
         });
         return parsedJsonArr;
     }
 
-    // static 
+    // special static 
     static fromParsedJson(parsedJsonArr) {
-        const newArr = new this();
+        const studentsArr = new this();
         parsedJsonArr.forEach(jsonObj => {
-            let newStudent = new module.exports.Student(jsonObj.firstName, jsonObj.lastName, jsonObj.gradeLvl);
-            newStudent.addPoints(jsonObj.points);
-            newArr.push(newStudent);
+            let student = new module.exports.Student(jsonObj.firstName, jsonObj.lastName, jsonObj.gradeLvl, jsonObj.points);
+            studentsArr.push(student);
         });
-        return newArr;
+        return studentsArr;
     }
 }
