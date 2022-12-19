@@ -1,14 +1,14 @@
-const json = require('./json.js');
-const {Student, StudentsArr} = require('./students.js');
-const {Event, EventsArr} = require('./events.js');
+const json = require("./json.js");
+const { Student, StudentsArr } = require("./students.js");
+const { Event, EventsArr } = require("./events.js");
 
 module.exports.AdminControl = class {
     // private fields
-    #studentsArr
-    #eventsArr
+    #studentsArr;
+    #eventsArr;
 
     // constructor
-    // assumes: 
+    // assumes:
     //   json file & its data exists and is valid (dont mess w the json file!)
     constructor() {
         [this.#studentsArr, this.#eventsArr] = json.readFromJson();
@@ -27,14 +27,17 @@ module.exports.AdminControl = class {
     //   a student object with matching first & last name or undefined
     getStudent(firstName, lastName) {
         return this.#studentsArr.list.find((studentObj) => {
-            return (studentObj.firstName === firstName) && (studentObj.lastName === lastName);
+            return (
+                studentObj.firstName === firstName &&
+                studentObj.lastName === lastName
+            );
         });
     }
     // returns:
     //   an event object with matching name or undefined
     getEvent(name) {
         return this.#eventsArr.list.find((eventObj) => {
-            return (eventObj.name === name);
+            return eventObj.name === name;
         });
     }
     generateReport() {}
@@ -49,7 +52,12 @@ module.exports.AdminControl = class {
         }
 
         // check for valid grade level
-        if (gradeLvl !== 9 && gradeLvl !== 10 && gradeLvl !== 11 && gradeLvl !== 12) {
+        if (
+            gradeLvl !== 9 &&
+            gradeLvl !== 10 &&
+            gradeLvl !== 11 &&
+            gradeLvl !== 12
+        ) {
             return false;
         }
 
@@ -70,8 +78,8 @@ module.exports.AdminControl = class {
             return false;
         }
 
-        // check for positive point value 
-        if (points < 0) {
+        // check for valid point value
+        if (points < 0 || typeof points !== "number") {
             return false;
         }
 
@@ -130,8 +138,4 @@ module.exports.AdminControl = class {
     saveToJson() {
         json.writeToJson(this.#studentsArr, this.#eventsArr);
     }
-
-
-
-
 };

@@ -4,12 +4,12 @@ module.exports.Student = class {
     #lastName;
     #gradeLvl;
     #points;
-    
+
     // constructor
     // assumes:
     //   all the parameters are provided and not undefined
     //   firstName: string
-    //   lastName: string 
+    //   lastName: string
     //   gradeLvl: number (integers 9, 10, 11, or 12)
     constructor(firstName, lastName, gradeLvl, points) {
         this.#firstName = firstName;
@@ -38,12 +38,12 @@ module.exports.Student = class {
     addPoints(pts) {
         this.#points += pts;
     }
-}
+};
 
 module.exports.StudentsArr = class {
     // private fields
     #list;
-    
+
     // constructor
     constructor() {
         this.#list = [];
@@ -62,25 +62,30 @@ module.exports.StudentsArr = class {
     // helper methods
     toParsedJson() {
         const parsedJsonArr = [];
-        this.list.forEach(studentObj => {
+        this.list.forEach((studentObj) => {
             let jsonObj = {
                 firstName: studentObj.firstName,
                 lastName: studentObj.lastName,
                 gradeLvl: studentObj.gradeLvl,
-                points: studentObj.points
+                points: studentObj.points,
             };
             parsedJsonArr.push(jsonObj);
         });
         return parsedJsonArr;
     }
 
-    // special static 
+    // special static
     static fromParsedJson(parsedJsonArr) {
         const studentsArr = new this();
-        parsedJsonArr.forEach(jsonObj => {
-            let student = new module.exports.Student(jsonObj.firstName, jsonObj.lastName, jsonObj.gradeLvl, jsonObj.points);
+        parsedJsonArr.forEach((jsonObj) => {
+            let student = new module.exports.Student(
+                jsonObj.firstName,
+                jsonObj.lastName,
+                jsonObj.gradeLvl,
+                jsonObj.points
+            );
             studentsArr.push(student);
         });
         return studentsArr;
     }
-}
+};

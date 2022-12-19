@@ -1,11 +1,18 @@
 {
-  "name": "fbla-regionals-2023-coding-programming",
-  "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "scripts": {
-    "test": "node index.js test"
-  },
-  "author": "Mack Rusing",
-  "license": "MIT"
+    "name": "fbla-regionals-2023-coding-programming",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "node app.js test",
+        "start": "node app.js"
+    },
+    "author": "Mack Rusing",
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.18.2"
+    },
+    "devDependencies": {
+        "prettier": "^2.8.1"
+    }
 }

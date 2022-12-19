@@ -1,8 +1,8 @@
-const fs = require('fs');
-const { StudentsArr } = require('./students.js');
-const { EventsArr } = require('./events.js');
+const fs = require("fs");
+const { StudentsArr } = require("./students.js");
+const { EventsArr } = require("./events.js");
 
-// assumes: 
+// assumes:
 //   json file is valid
 // returns:
 //   [array of student objects, array of event objects]
@@ -12,12 +12,15 @@ module.exports.readFromJson = () => {
     // get data from file
     let rawData = fs.readFileSync(DATA_FILE);
     let parsedData = JSON.parse(rawData);
-    
+
     // create & return students arr
-    return [StudentsArr.fromParsedJson(parsedData.students), EventsArr.fromParsedJson(parsedData.events)];
+    return [
+        StudentsArr.fromParsedJson(parsedData.students),
+        EventsArr.fromParsedJson(parsedData.events),
+    ];
 };
 
-// assumes: 
+// assumes:
 //   json file is valid
 //   arr is an array with student objects
 // warnings:
@@ -27,7 +30,7 @@ module.exports.writeToJson = (studentsArr, eventsArr) => {
     // parse arr as json
     let parsedData = {
         students: studentsArr.toParsedJson(),
-        events: eventsArr.toParsedJson()
+        events: eventsArr.toParsedJson(),
     };
     let rawData = JSON.stringify(parsedData);
 

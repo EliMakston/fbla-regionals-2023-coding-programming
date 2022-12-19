@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Document</title>
+    </head>
+    <body>
+        <form action="/" method="POST">
+            <h2>addStudent</h2>
+
+            <label for="firstName"
+                >firstName
+                <input type="text" name="firstName" id="firstName" required />
+            </label>
+
+            <label for="lastName"
+                >lastName
+                <input type="text" name="lastName" id="lastName" required />
+            </label>
+
+            <label for="gradeLvl"
+                >gradeLvl
+                <input
+                    type="number"
+                    name="gradeLvl"
+                    id="gradeLvl"
+                    min="9"
+                    max="12"
+                    required
+                />
+            </label>
+
+            <button type="submit">submit</button>
+        </form>
+
+        <form action="/" method="POST">
+            <h2>addEvent</h2>
+
+            <label for="name"
+                >name
+                <input type="text" name="name" id="name" required />
+            </label>
+
+            <label for="points"
+                >points
+                <input
+                    type="number"
+                    name="points"
+                    id="points"
+                    min="1"
+                    required
+                />
+            </label>
+
+            <button type="submit">submit</button>
+        </form>
+
+        <form action="/" method="POST">
+            <h2>logEvent</h2>
+
+            <label for="studentFirstName"
+                >studentFirstName
+                <input
+                    type="text"
+                    name="studentFirstName"
+                    id="studentFirstName"
+                    required
+                />
+            </label>
+
+            <label for="studentLastName"
+                >studentLastName
+                <input
+                    type="text"
+                    name="studentLastName"
+                    id="studentLastName"
+                    required
+                />
+            </label>
+
+            <button type="submit">submit</button>
+        </form>
+    </body>
+</html>
