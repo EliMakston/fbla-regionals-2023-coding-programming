@@ -7,7 +7,8 @@ const addStudentResult = document.querySelector("#addStudentResult");
 const addEventResult = document.querySelector("#addEventResult");
 const logEventResult = document.querySelector("#logEventResult");
 
-const studentTable = document.querySelector("#studentTable");
+const studentsTable = document.querySelector("#studentsTable");
+const eventsTable = document.querySelector("#eventsTable");
 
 // listeners
 addStudentForm.addEventListener("submit", submitAddStudent);
@@ -34,8 +35,9 @@ async function submitAddStudent(event) {
     // check for error
     if (!response.ok) {
         // provide feedback
-        addStudentResult.innerHTML = "there was a conflict with your submission";
-        
+        addStudentResult.innerHTML =
+            "there was a conflict with your submission";
+
         // throw error
         throw new Error(response.status);
     }
@@ -48,6 +50,9 @@ async function submitAddStudent(event) {
         " (grade " +
         formData.gradeLvl +
         ") was added succesfully";
+
+    // update page
+    updatePage();
 }
 async function submitAddEvent(event) {
     event.preventDefault();
@@ -69,7 +74,7 @@ async function submitAddEvent(event) {
     if (!response.ok) {
         // provide feedback
         addEventResult.innerHTML = "there was a conflict with your submission";
-        
+
         // throw error
         throw new Error(response.status);
     }
@@ -80,6 +85,9 @@ async function submitAddEvent(event) {
         " (" +
         formData.points +
         " points) was added succesfully";
+
+    // update page
+    updatePage();
 }
 async function submitLogEvent(event) {
     event.preventDefault();
@@ -112,13 +120,15 @@ async function submitLogEvent(event) {
         formData.studentLastName +
         " succesfully completed " +
         formData.eventName;
+
+    // update page
+    updatePage();
 }
 
 // helper functions
-// returns: 
+// returns:
 //   a table element
-async function createStudentTable() {
-
+async function createStudentsTable() {
     // create a request to api
     const response = await fetch("/api/students", {
         method: "GET",
@@ -135,7 +145,7 @@ async function createStudentTable() {
 
     // get students from response
     const students = await response.json();
-    
+
     // sort into grades
     const grade9 = students.filter((studentObj) => {
         return studentObj.gradeLvl === 9;
@@ -157,7 +167,7 @@ async function createStudentTable() {
     grade11.sort((a, b) => {
         return b.points - a.points;
     });
-    
+
     const grade12 = students.filter((studentObj) => {
         return studentObj.gradeLvl === 12;
     });
@@ -167,7 +177,7 @@ async function createStudentTable() {
 
     const table = document.createElement("table");
     const headerRow = document.createElement("tr");
-    
+
     const r1c1 = document.createElement("th");
     r1c1.innerText = "Last Name";
     const r1c2 = document.createElement("th");
@@ -177,7 +187,7 @@ async function createStudentTable() {
     const r1c4 = document.createElement("th");
     r1c4.innerText = "Grade";
 
-    headerRow.append(r1c1, r1c2, r1c3);
+    headerRow.append(r1c1, r1c2, r1c3, r1c4);
     table.append(headerRow);
 
     grade9.forEach((studentObj) => {
@@ -234,9 +244,59 @@ async function createStudentTable() {
     });
 
     // return table;
-    studentTable.replaceChildren(table);
+    studentsTable.replaceChildren(table);
 }
 
-createStudentTable();
+async function createElementsTable() {
+    // create a request to api
+    const response = await fetch("/api/events", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    // check for error
+    if (!response.ok) {
+        // throw error
+        throw new Error(response.status);
+    }
+
+    // get students from response
+    const events = await response.json();
+
+    const table = document.createElement("table");
+    const headerRow = document.createElement("tr");
+
+    const r1c1 = document.createElement("th");
+    r1c1.innerText = "Name";
+    const r1c2 = document.createElement("th");
+    r1c2.innerText = "Points";
+
+    headerRow.append(r1c1, r1c2);
+    table.append(headerRow);
+
+    events.forEach((eventObj) => {
+        const row = document.createElement("tr");
+        const c1 = document.createElement("td");
+        c1.innerText = eventObj.name;
+        const c2 = document.createElement("td");
+        c2.innerText = eventObj.points;
+        row.append(c1, c2);
+        table.append(row);
+    });
+
+    // return table;
+    eventsTable.replaceChildren(table);
+}
+
+// page updater
+//   should be run every time a form is successfully submited / on page load
+async function updatePage() {
+    createStudentsTable();
+    createElementsTable();
+}
+
+updatePage();
 
 // studentTable.replaceChildren(createStudentTable());
