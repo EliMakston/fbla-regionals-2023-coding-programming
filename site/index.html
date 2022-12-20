@@ -7,7 +7,8 @@
         <title>Document</title>
     </head>
     <body>
-        <form action="/" method="POST">
+        <!-- addStudent form -->
+        <form id="addStudentForm">
             <h2>addStudent</h2>
 
             <label for="firstName"
@@ -33,9 +34,12 @@
             </label>
 
             <button type="submit">submit</button>
+
+            <p id="addStudentResult">no result</p>
         </form>
 
-        <form action="/" method="POST">
+        <!-- addEvent form -->
+        <form id="addEventForm">
             <h2>addEvent</h2>
 
             <label for="name"
@@ -55,9 +59,12 @@
             </label>
 
             <button type="submit">submit</button>
+
+            <p id="addEventResult">no result</p>
         </form>
 
-        <form action="/" method="POST">
+        <!-- logEvent form -->
+        <form id="logEventForm">
             <h2>logEvent</h2>
 
             <label for="studentFirstName"
@@ -80,7 +87,24 @@
                 />
             </label>
 
+            <label for="eventName"
+                >eventName
+                <input
+                    type="text"
+                    name="eventName"
+                    id="eventName"
+                    required
+                />
+            </label>
+
             <button type="submit">submit</button>
+
+            <p id="logEventResult">no result</p>
         </form>
+
+        <!-- students table -->
+        <div id="studentTable"></div>
+
+        <script src="resources/js/index.js"></script>
     </body>
 </html>
