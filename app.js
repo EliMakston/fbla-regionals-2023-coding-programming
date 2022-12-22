@@ -5,7 +5,8 @@ const { AdminControl } = require("./api/adminControl.js");
 // const students = require('./students.js');
 
 // global vars
-global.DATA_FILE = "./data/data.json";
+global.STUDENTS_DATA_FILE = "./data/students.json";
+global.EVENTS_DATA_FILE = "./data/events.json";
 
 // web application
 const app = express();

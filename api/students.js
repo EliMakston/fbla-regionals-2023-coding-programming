@@ -60,7 +60,7 @@ module.exports.StudentsArr = class {
     }
 
     // helper methods
-    toParsedJson() {
+    toData() {
         const parsedJsonArr = [];
         this.list.forEach((studentObj) => {
             let jsonObj = {
@@ -74,18 +74,18 @@ module.exports.StudentsArr = class {
         return parsedJsonArr;
     }
 
-    // special static
-    static fromParsedJson(parsedJsonArr) {
-        const studentsArr = new this();
-        parsedJsonArr.forEach((jsonObj) => {
+    // special constructor
+    static fromData(studentsArrData) {
+        const studentsArrObj = new this();
+        studentsArrData.forEach((studentData) => {
             let student = new module.exports.Student(
-                jsonObj.firstName,
-                jsonObj.lastName,
-                jsonObj.gradeLvl,
-                jsonObj.points
+                studentData.firstName,
+                studentData.lastName,
+                studentData.gradeLvl,
+                studentData.points
             );
-            studentsArr.push(student);
+            studentsArrObj.push(student);
         });
-        return studentsArr;
+        return studentsArrObj;
     }
 };

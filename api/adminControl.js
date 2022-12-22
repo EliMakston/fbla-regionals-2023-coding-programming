@@ -2,25 +2,68 @@ const json = require("./json.js");
 const { Student, StudentsArr } = require("./students.js");
 const { Event, EventsArr } = require("./events.js");
 
+// message strings
+const notFound = "not found";
+
+class Result {
+    #isOk;
+    #value;
+
+    get isOk() {
+        return this.#isOk;
+    }
+    get value() {
+        return this.#value;
+    }
+
+    constructor(isOk, value) {
+        this.#isOk = isOk;
+        this.#value = value;
+    }
+}
+class Ok extends Result {
+    constructor(value) {
+        super(true, value);
+    }
+}
+class Err extends Result {
+    constructor(messageStr) {
+        super(false, { message: messageStr });
+    }
+}
+
 module.exports.AdminControl = class {
-    // private fields
-    #studentsArr;
-    #eventsArr;
-
-    // constructor
-    // assumes:
-    //   json file & its data exists and is valid (dont mess w the json file!)
     constructor() {
-        [this.#studentsArr, this.#eventsArr] = json.readFromJson();
+        console.log("admin control object created");
     }
 
-    // basic getter methods (maybe remove after development)
-    get studentsArr() {
-        return this.#studentsArr;
+    getStudents() {
+        return new Ok(json.readStudentsArrObj().toData());
     }
-    get eventsArr() {
-        return this.#eventsArr;
+    getStudentsByGrade(gradeLvl) {
+        // validate gradeLvl
+        if (gradeLvl !== 9 && gradeLvl !== 10 && gradeLvl !== 11 && gradeLvl !== 12) {
+            return new Err("invalid query: gradeLvl must be the numbers 9, 10, 11, or 12");
+        }
+        
+        const studentsArrData = json.readStudentsArrObj().toData();
+        const studentsInGrade = studentsArrData.filter((studentData) => {
+            return studentData.gradeLvl === gradeLvl;
+        });
+
+        return new Ok(studentsInGrade);
     }
+    getStudent(firstName, LastName) {
+        
+    }
+
+    getEvents() {}
+    getEvent(name) {}
+
+    addStudent(firstName, lastName, gradeLvl) {}
+    addEvent(name, points) {}
+
+    logEvent(studentFirstName, studentLastName, eventName) {}
 
     // accessor methods
     // returns:

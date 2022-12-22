@@ -2,38 +2,22 @@ const fs = require("fs");
 const { StudentsArr } = require("./students.js");
 const { EventsArr } = require("./events.js");
 
-// assumes:
-//   json file is valid
-// returns:
-//   [array of student objects, array of event objects]
-// warnings:
-//   is syncronous
-module.exports.readFromJson = () => {
-    // get data from file
-    let rawData = fs.readFileSync(DATA_FILE);
-    let parsedData = JSON.parse(rawData);
+module.exports.readStudentsArrObj = () => {
+    const rawData = fs.readFileSync(STUDENTS_DATA_FILE);
+    const studentsArrData = JSON.parse(rawData);
 
-    // create & return students arr
-    return [
-        StudentsArr.fromParsedJson(parsedData.students),
-        EventsArr.fromParsedJson(parsedData.events),
-    ];
+    return StudentsArr.fromData(studentsArrData);
+};
+module.exports.readEventsArrObj = () => {
+    const rawData = fs.readFileSync(EVENTS_DATA_FILE);
+    const eventsArrData = JSON.parse(rawData);
+
+    return EventsArr.fromData(eventsArrData);
 };
 
-// assumes:
-//   json file is valid
-//   arr is an array with student objects
-// warnings:
-//   is syncronous
-//   overwrites all existing data
-module.exports.writeToJson = (studentsArr, eventsArr) => {
-    // parse arr as json
-    let parsedData = {
-        students: studentsArr.toParsedJson(),
-        events: eventsArr.toParsedJson(),
-    };
-    let rawData = JSON.stringify(parsedData);
-
-    // write to file
-    fs.writeFileSync(DATA_FILE, rawData);
+module.exports.writeStudentsArrObj = (studentsArrObj) => {
+    fs.writeFileSync(STUDENTS_DATA_FILE, JSON.stringify(studentsArrObj.toData()));
+};
+module.exports.writeEventsArrObj = (eventsArrObj) => {
+    fs.writeFileSync(EVENTS_DATA_FILE, JSON.stringify(eventsArrObj.toData()));
 };
