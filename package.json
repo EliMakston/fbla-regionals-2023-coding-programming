@@ -5,7 +5,9 @@
     "main": "index.js",
     "scripts": {
         "test": "node app.js test",
-        "start": "node app.js"
+        "start": "node app.js",
+        "format": "npx prettier -w ./",
+        "compile": "npx sass ./site/scss/styles.scss ./site/static/resources/styles/styles.css"
     },
     "author": "Mack Rusing",
     "license": "MIT",
@@ -13,6 +15,7 @@
         "express": "^4.18.2"
     },
     "devDependencies": {
-        "prettier": "^2.8.1"
+        "prettier": "^2.8.1",
+        "sass": "^1.57.1"
     }
 }

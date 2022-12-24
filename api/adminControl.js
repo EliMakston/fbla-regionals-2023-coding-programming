@@ -34,151 +34,315 @@ class Err extends Result {
 
 module.exports.AdminControl = class {
     constructor() {
-        console.log("admin control object created");
+        console.log("admin control object created\n");
     }
 
     getStudents() {
         return new Ok(json.readStudentsArrObj().toData());
     }
     getStudentsByGrade(gradeLvl) {
-        // validate gradeLvl
-        if (gradeLvl !== 9 && gradeLvl !== 10 && gradeLvl !== 11 && gradeLvl !== 12) {
-            return new Err("invalid query: gradeLvl must be the numbers 9, 10, 11, or 12");
+        // cleanse parameters
+        gradeLvl = validateGradeLvl(gradeLvl);
+
+        // catch validation errs
+        if (!gradeLvl.isOk) {
+            return gradeLvl;
         }
-        
+
+        // unwrap sucessful value
+        gradeLvl = gradeLvl.value;
+
+        // filter to grade
         const studentsArrData = json.readStudentsArrObj().toData();
         const studentsInGrade = studentsArrData.filter((studentData) => {
             return studentData.gradeLvl === gradeLvl;
         });
 
+        // return filtered list
         return new Ok(studentsInGrade);
     }
-    getStudent(firstName, LastName) {
-        
-    }
-
-    getEvents() {}
-    getEvent(name) {}
-
-    addStudent(firstName, lastName, gradeLvl) {}
-    addEvent(name, points) {}
-
-    logEvent(studentFirstName, studentLastName, eventName) {}
-
-    // accessor methods
-    // returns:
-    //   a student object with matching first & last name or undefined
     getStudent(firstName, lastName) {
-        return this.#studentsArr.list.find((studentObj) => {
+        // cleanse parameters
+        firstName = validateFirstName(firstName);
+        lastName = validateLastName(lastName);
+
+        // catch validation errs
+        if (!firstName.isOk) {
+            return firstName;
+        }
+        if (!lastName.isOk) {
+            return lastName;
+        }
+
+        // unwrap values
+        firstName = firstName.value;
+        lastName = lastName.value;
+
+        // filter array
+        const studentsArrData = json.readStudentsArrObj().toData();
+        const foundStudentData = studentsArrData.find((studentData) => {
             return (
-                studentObj.firstName === firstName &&
-                studentObj.lastName === lastName
+                studentData.firstName === firstName &&
+                studentData.lastName === lastName
             );
         });
+
+        // check for result
+        if (typeof foundStudentData === "undefined") {
+            return new Err(
+                "not found: a student with this name does not exist yet"
+            );
+        }
+
+        return new Ok(foundStudentData);
     }
-    // returns:
-    //   an event object with matching name or undefined
+
+    getEvents() {
+        return new Ok(json.readEventsArrObj().toData());
+    }
     getEvent(name) {
-        return this.#eventsArr.list.find((eventObj) => {
-            return eventObj.name === name;
-        });
-    }
-    generateReport() {}
+        // cleanse parameters
+        name = validateName(name);
 
-    // modifier methods
-    // returns:
-    //   true if the student was added successfully, and false if there is an issue with the input
+        // catch validation errs
+        if (!name.isOk) {
+            return name;
+        }
+
+        // unwrap result
+        name = name.value;
+
+        const eventsArrData = json.readEventsArrObj().toData();
+        const foundEventData = eventsArrData.find((eventData) => {
+            return eventData.name === name;
+        });
+
+        // check for result
+        if (typeof foundEventData === "undefined") {
+            return new Err(
+                "not found: an event with this name does not exist yet"
+            );
+        }
+
+        return new Ok(foundEventData);
+    }
+
     addStudent(firstName, lastName, gradeLvl) {
+        // cleanse params
+        firstName = validateFirstName(firstName);
+        lastName = validateLastName(lastName);
+        gradeLvl = validateGradeLvl(gradeLvl);
+
+        // catch validation errs
+        if (!firstName.isOk) {
+            return firstName;
+        }
+        if (!lastName.isOk) {
+            return lastName;
+        }
+        if (!gradeLvl.isOk) {
+            return gradeLvl;
+        }
+
+        // unwrap values
+        firstName = firstName.value;
+        lastName = lastName.value;
+        gradeLvl = gradeLvl.value;
+
         // check for existing student
-        if (this.getStudent(firstName, lastName) !== undefined) {
-            return false;
+        const existing = this.getStudent(firstName, lastName);
+        if (existing.isOk) {
+            return new Err(
+                "conflict: a student with this name already exists"
+            );
         }
 
-        // check for valid grade level
-        if (
-            gradeLvl !== 9 &&
-            gradeLvl !== 10 &&
-            gradeLvl !== 11 &&
-            gradeLvl !== 12
-        ) {
-            return false;
-        }
-
-        // create and add student
+        // create student
         const newStudent = new Student(firstName, lastName, gradeLvl, 0);
-        this.#studentsArr.push(newStudent);
 
-        // save file
-        this.saveToJson();
+        // read & write data
+        const studentsArrObj = json.readStudentsArrObj();
+        studentsArrObj.push(newStudent);
+        json.writeStudentsArrObj(studentsArrObj);
 
-        return true;
+        return new Ok({
+            "message": "student added sucessfully"
+        })
     }
-    // returns:
-    //   true if the event was added successfully, and false if there is an issue with the input
     addEvent(name, points) {
+        // cleanse params
+        name = validateName(name);
+        points = validatePoints(points);
+
+        // catch validation errs
+        if (!name.isOk) {
+            return name;
+        }
+        if (!points.isOk) {
+            return points;
+        }
+
+        // unwrap values
+        name = name.value;
+        points = points.value;
+
         // check for existing event
-        if (this.getEvent(name) !== undefined) {
-            return false;
+        const existing = this.getEvent(name);
+        if (existing.isOk) {
+            return new Err(
+                "conflict: an event with this name already exists"
+            );
         }
 
-        // check for valid point value
-        if (points < 0 || typeof points !== "number") {
-            return false;
-        }
-
-        // create and add event
+        // create event
         const newEvent = new Event(name, points);
-        this.#eventsArr.push(newEvent);
 
-        // save file
-        this.saveToJson();
+        // read & write data
+        const eventsArrObj = json.readEventsArrObj();
+        eventsArrObj.push(newEvent);
+        json.writeEventsArrObj(eventsArrObj);
 
-        return true;
+        return new Ok({
+            "message": "event added sucessfully"
+        });
     }
-    // returns:
-    //   true if the points were logged successfully, and false if there is an issue with the input
-    logEvent(studentFirstName, studentLastName, eventName) {
-        const student = this.getStudent(studentFirstName, studentLastName);
-        const event = this.getEvent(eventName);
-        if (student === undefined || event === undefined) {
-            return false;
+
+    logActivity(studentFirstName, studentLastName, eventName) {
+        // cleanse parameters
+        studentFirstName = validateStudentFirstName(studentFirstName);
+        studentLastName = validateStudentLastName(studentLastName);
+        eventName = validateEventName(eventName);
+
+        // catch validation errs
+        if (!studentFirstName.isOk) {
+            return studentFirstName;
+        }
+        if (!studentLastName.isOk) {
+            return studentLastName;
+        }
+        if (!eventName.isOk) {
+            return eventName;
         }
 
-        // add points
-        student.addPoints(event.points);
+        // unwrap values
+        studentFirstName = studentFirstName.value;
+        studentLastName = studentLastName.value;
+        eventName = eventName.value;
 
-        // save file
-        this.saveToJson();
+        // check for existing
+        const existingStudent = this.getStudent(studentFirstName, studentLastName);
+        const existingEvent = this.getEvent(eventName);
 
-        return true;
-    }
+        if (!existingStudent.isOk) {
+            return existingStudent;
+        }
+        if (!existingEvent.isOk) {
+            return existingEvent;
+        }
 
-    // development helpers
-    printStudents() {
-        console.log("[");
-        this.#studentsArr.list.forEach((studentObj) => {
-            console.log("  {");
-            console.log("    firstName: " + studentObj.firstName);
-            console.log("    lastName: " + studentObj.lastName);
-            console.log("    gradeLvl: " + studentObj.gradeLvl);
-            console.log("    points: " + studentObj.points);
-            console.log("  },");
+        // read student data
+        const studentsArrObj = json.readStudentsArrObj();
+
+        // get & modify student
+        const student = studentsArrObj.list.find((studentData) => {
+            return (
+                studentData.firstName === studentFirstName &&
+                studentData.lastName === studentLastName
+            );
         });
-        console.log("]");
-    }
-    printEvents() {
-        console.log("[");
-        this.#eventsArr.list.forEach((eventObj) => {
-            console.log("  {");
-            console.log("    name: " + eventObj.name);
-            console.log("    points: " + eventObj.points);
-            console.log("  },");
-        });
-        console.log("]");
-    }
+        const eventPts = this.getEvent(eventName).value.points;
+        student.addPoints(eventPts);
+        json.writeStudentsArrObj(studentsArrObj);
 
-    // helper functions
-    saveToJson() {
-        json.writeToJson(this.#studentsArr, this.#eventsArr);
+        return new Ok({
+            "message": "activity logged sucessfully"
+        });
     }
 };
+
+// validator functions
+function validateGradeLvl(gradeLvl) {
+    if (
+        gradeLvl !== 9 &&
+        gradeLvl !== 10 &&
+        gradeLvl !== 11 &&
+        gradeLvl !== 12
+    ) {
+        return new Err(
+            "invalid query: gradeLvl must be of type 'number' and have a value of 9, 10, 11, or 12"
+        );
+    }
+
+    return new Ok(gradeLvl);
+}
+
+function validateFirstName(firstName) {
+    if (typeof firstName !== "string") {
+        return new Err(
+            "invalid query: firstName must be of type 'string'"
+        );
+    }
+
+    return new Ok(firstName);
+}
+
+function validateLastName(lastName) {
+    if (typeof lastName !== "string") {
+        return new Err(
+            "invalid query: lastName must be of type 'string'"
+        );
+    }
+
+    return new Ok(lastName);
+}
+
+function validateName(name) {
+    if (typeof name !== "string") {
+        return new Err(
+            "invalid query: name must be of type 'string'" 
+        );
+    }
+
+    return new Ok(name);
+}
+
+function validatePoints(points) {
+    if (typeof points !== "number") {
+        return new Err(
+            "invalid query: points must be of type 'number'"
+        );
+    }
+    if (points <= 0) {
+        return new Err(
+            "invalid query: points must be a value greater than 0"
+        );
+    }
+
+    return new Ok(points);
+}
+
+function validateStudentFirstName(studentFirstName) {
+    if (typeof studentFirstName !== "string") {
+        return new Err("invalid query: studentFirstName must be of type 'string'");
+    }
+
+    return new Ok(studentFirstName);
+}
+
+function validateStudentLastName(studentLastName) {
+    if (typeof studentLastName !== "string") {
+        return new Err(
+            "invalid query: studentLastName must be of type 'string'"
+        );
+    }
+
+    return new Ok(studentLastName);
+}
+
+function validateEventName(eventName) {
+    if (typeof eventName !== "string") {
+        return new Err("invalid query: eventName must be of type 'string'");
+    }
+
+    return new Ok(eventName);
+}

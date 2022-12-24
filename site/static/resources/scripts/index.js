@@ -24,7 +24,7 @@ async function submitAddStudent(event) {
     formData.gradeLvl = parseInt(formData.gradeLvl);
 
     // create a request to api
-    const response = await fetch("/api/addStudent", {
+    const response = await fetch("/api/students", {
         method: "POST",
         body: JSON.stringify(formData),
         headers: {
@@ -62,7 +62,7 @@ async function submitAddEvent(event) {
     formData.points = parseInt(formData.points);
 
     // create a request to api
-    const response = await fetch("/api/addEvent", {
+    const response = await fetch("/api/events", {
         method: "POST",
         body: JSON.stringify(formData),
         headers: {
@@ -96,7 +96,7 @@ async function submitLogEvent(event) {
     const formData = Object.fromEntries(new FormData(event.target).entries());
 
     // create a request to api
-    const response = await fetch("/api/logEvent", {
+    const response = await fetch("/api/logActivity", {
         method: "POST",
         body: JSON.stringify(formData),
         headers: {
@@ -130,7 +130,31 @@ async function submitLogEvent(event) {
 //   a table element
 async function createStudentsTable() {
     // create a request to api
-    const response = await fetch("/api/students", {
+    const urlBase = "/api/students?";
+    const url9 = urlBase + new URLSearchParams({ gradeLvl: 9 });
+    const url10 = urlBase + new URLSearchParams({ gradeLvl: 10 });
+    const url11 = urlBase + new URLSearchParams({ gradeLvl: 11 });
+    const url12 = urlBase + new URLSearchParams({ gradeLvl: 12 });
+
+    const response9 = await fetch(url9, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const response10 = await fetch(url10, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const response11 = await fetch(url11, {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+    const response12 = await fetch(url12, {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
@@ -138,39 +162,25 @@ async function createStudentsTable() {
     });
 
     // check for error
-    if (!response.ok) {
+    if (!response9.ok || !response10.ok || !response11.ok || !response12.ok) {
         // throw error
-        throw new Error(response.status);
+        throw new Error("problem w/ get req");
     }
 
     // get students from response
-    const students = await response.json();
-
-    // sort into grades
-    const grade9 = students.filter((studentObj) => {
-        return studentObj.gradeLvl === 9;
-    });
+    const grade9 = await response9.json();
     grade9.sort((a, b) => {
         return b.points - a.points;
     });
-
-    const grade10 = students.filter((studentObj) => {
-        return studentObj.gradeLvl === 10;
-    });
+    const grade10 = await response10.json();
     grade10.sort((a, b) => {
         return b.points - a.points;
     });
-
-    const grade11 = students.filter((studentObj) => {
-        return studentObj.gradeLvl === 11;
-    });
+    const grade11 = await response11.json();
     grade11.sort((a, b) => {
         return b.points - a.points;
     });
-
-    const grade12 = students.filter((studentObj) => {
-        return studentObj.gradeLvl === 12;
-    });
+    const grade12 = await response12.json();
     grade12.sort((a, b) => {
         return b.points - a.points;
     });
