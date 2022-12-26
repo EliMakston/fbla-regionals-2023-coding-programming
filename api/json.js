@@ -16,7 +16,10 @@ module.exports.readEventsArrObj = () => {
 };
 
 module.exports.writeStudentsArrObj = (studentsArrObj) => {
-    fs.writeFileSync(STUDENTS_DATA_FILE, JSON.stringify(studentsArrObj.toData()));
+    fs.writeFileSync(
+        STUDENTS_DATA_FILE,
+        JSON.stringify(studentsArrObj.toData())
+    );
 };
 module.exports.writeEventsArrObj = (eventsArrObj) => {
     fs.writeFileSync(EVENTS_DATA_FILE, JSON.stringify(eventsArrObj.toData()));

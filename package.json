@@ -6,8 +6,9 @@
     "scripts": {
         "test": "node app.js test",
         "start": "node app.js",
-        "format": "npx prettier -w ./",
-        "compile": "npx sass ./site/scss/styles.scss ./site/static/resources/styles/styles.css"
+        "fmt": "npx prettier -w ./",
+        "cmp": "npx sass ./site/scss/style.scss ./site/static/resources/styles/style.css",
+        "watch": "npx sass --watch ./site/scss/style.scss ./site/static/resources/styles/style.css"
     },
     "author": "Mack Rusing",
     "license": "MIT",

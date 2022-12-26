@@ -34,7 +34,7 @@ app.get("/api/students", (req, res) => {
         console.log("  no query provided");
 
         const result = adminCtrl.getStudents();
-        
+
         console.log("  200 OK \n");
         return res.status(200).send(result.value);
     }
@@ -44,12 +44,12 @@ app.get("/api/students", (req, res) => {
         console.log("  querying for 'gradeLvl = " + gradeLvl + "'");
 
         const result = adminCtrl.getStudentsByGrade(gradeLvl);
-        
+
         if (!result.isOk) {
             console.log("  400 Bad Request \n");
             return res.status(400).send(result.value);
         }
-        
+
         console.log("  200 OK \n");
         return res.status(200).send(result.value);
     }
@@ -85,16 +85,23 @@ app.get("/api/students", (req, res) => {
     // bad request
     console.log("  400 Bad Request\n");
     return res.status(400).send({
-        "message": "invalid query: check docs for help"
+        message: "invalid query: check docs for help",
     });
 });
 app.post("/api/students", (req, res) => {
     console.log("recieved POST request to /api/students...");
 
-    const result = adminCtrl.addStudent(req.body.firstName, req.body.lastName, req.body.gradeLvl);
+    const result = adminCtrl.addStudent(
+        req.body.firstName,
+        req.body.lastName,
+        req.body.gradeLvl
+    );
 
     if (!result.isOk) {
-        if (result.value.message === "conflict: a student with this name already exists") {
+        if (
+            result.value.message ===
+            "conflict: a student with this name already exists"
+        ) {
             console.log("  409 Conflict\n");
             return res.status(409).send(result.value);
         }
@@ -133,7 +140,10 @@ app.get("/api/events", (req, res) => {
         const result = adminCtrl.getEvent(name);
 
         if (!result.isOk) {
-            if (result.value.message === "not found: an event with this name does not exist yet") {
+            if (
+                result.value.message ===
+                "not found: an event with this name does not exist yet"
+            ) {
                 console.log("  404 Not Found\n");
                 return res.status(404).send(result.value);
             }
@@ -157,7 +167,10 @@ app.post("/api/events", (req, res) => {
     const result = adminCtrl.addEvent(req.body.name, req.body.points);
 
     if (!result.isOk) {
-        if (result.value.message === "conflict: an event with this name already exists") {
+        if (
+            result.value.message ===
+            "conflict: an event with this name already exists"
+        ) {
             console.log("  409 Conflict\n");
             return res.status(409).send(result.value);
         }
@@ -174,10 +187,19 @@ app.post("/api/events", (req, res) => {
 app.post("/api/logActivity", (req, res) => {
     console.log("recieved POST request to /api/logActivity...");
 
-    const result = adminCtrl.logActivity(req.body.studentFirstName, req.body.studentLastName, req.body.eventName);
+    const result = adminCtrl.logActivity(
+        req.body.studentFirstName,
+        req.body.studentLastName,
+        req.body.eventName
+    );
 
     if (!result.isOk) {
-        if (result.value.message === "not found: a student with this name does not exist yet" || result.value.message === "not found: an event with this name does not exist yet") {
+        if (
+            result.value.message ===
+                "not found: a student with this name does not exist yet" ||
+            result.value.message ===
+                "not found: an event with this name does not exist yet"
+        ) {
             console.log("  404 Not Found\n");
             return res.status(404).send(result.value);
         }

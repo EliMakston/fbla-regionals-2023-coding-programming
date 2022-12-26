@@ -1,107 +1,178 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <!-- metadata -->
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- info -->
         <title>Document</title>
+
+        <!-- stylesheet -->
+        <link rel="stylesheet" href="resources/styles/style.css" />
     </head>
     <body>
         <!-- addStudent form -->
-        <form id="addStudentForm">
-            <h2>addStudent</h2>
+        <div class="form-container">
+            <h2>New Student</h2>
+            <form id="addStudentForm">
+                <div class="input">
+                    <div class="field">
+                        <label for="firstName">First Name</label>
+                        <input
+                            type="text"
+                            name="firstName"
+                            id="firstName"
+                            class="user-input"
+                            required
+                        />
+                    </div>
 
-            <label for="firstName"
-                >firstName
-                <input type="text" name="firstName" id="firstName" required />
-            </label>
+                    <div class="field">
+                        <label for="lastName">Last Name</label>
+                        <input
+                            type="text"
+                            name="lastName"
+                            id="lastName"
+                            class="user-input"
+                            required
+                        />
+                    </div>
 
-            <label for="lastName"
-                >lastName
-                <input type="text" name="lastName" id="lastName" required />
-            </label>
+                    <div class="field">
+                        <label for="gradeLvl">Grade Level</label>
+                        <div class="user-input radio">
+                            <input
+                                type="radio"
+                                name="gradeLvl"
+                                id="add-student-grade-lvl-9"
+                                value="9"
+                                required
+                            />
+                            <label for="add-student-grade-lvl-9">9</label>
+                            <input
+                                type="radio"
+                                name="gradeLvl"
+                                id="add-student-grade-lvl-10"
+                                value="10"
+                                required
+                            />
+                            <label for="add-student-grade-lvl-10">10</label>
+                            <input
+                                type="radio"
+                                name="gradeLvl"
+                                id="add-student-grade-lvl-11"
+                                value="11"
+                                required
+                            />
+                            <label for="add-student-grade-lvl-11">11</label>
+                            <input
+                                type="radio"
+                                name="gradeLvl"
+                                id="add-student-grade-lvl-12"
+                                value="12"
+                                required
+                            />
+                            <label for="add-student-grade-lvl-12">12</label>
+                        </div>
+                    </div>
+                </div>
 
-            <label for="gradeLvl"
-                >gradeLvl
-                <input
-                    type="number"
-                    name="gradeLvl"
-                    id="gradeLvl"
-                    min="9"
-                    max="12"
-                    required
-                />
-            </label>
-
-            <button type="submit">submit</button>
-
-            <p id="addStudentResult">no result</p>
-        </form>
+                <div class="submit">
+                    <button type="submit" class="form-submit-button">
+                        Submit
+                    </button>
+                </div>
+            </form>
+            <p id="addStudentResult" class="form-result">
+                [submit this form to add a new student]
+            </p>
+        </div>
 
         <!-- addEvent form -->
-        <form id="addEventForm">
-            <h2>addEvent</h2>
+        <div class="form-container">
+            <h2>New Event</h2>
 
-            <label for="name"
-                >name
-                <input type="text" name="name" id="name" required />
-            </label>
+            <form id="addEventForm">
+                <div class="input">
+                    <div class="field">
+                        <label for="name">Name</label>
+                        <input
+                            type="text"
+                            name="name"
+                            id="name"
+                            class="user-input"
+                            required
+                        />
+                    </div>
 
-            <label for="points"
-                >points
-                <input
-                    type="number"
-                    name="points"
-                    id="points"
-                    min="1"
-                    required
-                />
-            </label>
+                    <div class="field">
+                        <label for="points">Points</label>
+                        <input
+                            type="number"
+                            name="points"
+                            id="points"
+                            min="1"
+                            class="user-input"
+                            required
+                        />
+                    </div>
+                </div>
 
-            <button type="submit">submit</button>
+                <div class="submit">
+                    <button type="submit" class="form-submit-button">
+                        Submit
+                    </button>
+                </div>
+            </form>
 
-            <p id="addEventResult">no result</p>
-        </form>
+            <p id="addEventResult" class="form-result">
+                [submit this form to add a new event]
+            </p>
+        </div>
 
         <!-- logEvent form -->
-        <form id="logEventForm">
-            <h2>logEvent</h2>
+        <div class="form-container">
+            <h2>Log Activity</h2>
 
-            <label for="studentFirstName"
-                >studentFirstName
-                <input
-                    type="text"
-                    name="studentFirstName"
-                    id="studentFirstName"
-                    required
-                />
-            </label>
+            <form id="logEventForm">
+                <div class="input">
+                    <div class="field">
+                        <label for="student-dropdown">Student</label>
+                        <select
+                            class="user-input"
+                            name="student-dropdown"
+                            id="student-dropdown"
+                        ></select>
+                    </div>
 
-            <label for="studentLastName"
-                >studentLastName
-                <input
-                    type="text"
-                    name="studentLastName"
-                    id="studentLastName"
-                    required
-                />
-            </label>
+                    <div class="field">
+                        <label for="event-dropdown">Event</label>
+                        <select
+                            class="user-input"
+                            name="event-dropdown"
+                            id="event-dropdown"
+                        ></select>
+                    </div>
+                </div>
 
-            <label for="eventName"
-                >eventName
-                <input type="text" name="eventName" id="eventName" required />
-            </label>
-
-            <button type="submit">submit</button>
-
-            <p id="logEventResult">no result</p>
-        </form>
+                <div class="submit">
+                    <button type="submit" class="form-submit-button">
+                        submit
+                    </button>
+                </div>
+            </form>
+            <p id="logEventResult" class="form-result">
+                [submit this form to log a student's activity]
+            </p>
+        </div>
 
         <!-- students table -->
-        <div id="studentsTable"></div>
+        <!-- <div id="studentsTable" class="container"></div> -->
 
         <!-- events table -->
-        <div id="eventsTable"></div>
+        <!-- <div id="eventsTable" class="container"></div> -->
 
         <script src="resources/scripts/index.js"></script>
     </body>

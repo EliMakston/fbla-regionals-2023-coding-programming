@@ -15,6 +15,15 @@ addStudentForm.addEventListener("submit", submitAddStudent);
 addEventForm.addEventListener("submit", submitAddEvent);
 logEventForm.addEventListener("submit", submitLogEvent);
 
+// current data
+let currentStudents;
+// let current9Students;
+// let current10Students;
+// let current11Students;
+// let current12students;
+
+let currentEvents;
+
 // callback functions
 async function submitAddStudent(event) {
     event.preventDefault();
@@ -35,15 +44,14 @@ async function submitAddStudent(event) {
     // check for error
     if (!response.ok) {
         // provide feedback
-        addStudentResult.innerHTML =
-            "there was a conflict with your submission";
+        addStudentResult.innerText = "a student with this name already exists";
 
         // throw error
         throw new Error(response.status);
     }
 
     // provide feedback
-    addStudentResult.innerHTML =
+    addStudentResult.innerText =
         formData.firstName +
         " " +
         formData.lastName +
@@ -73,14 +81,14 @@ async function submitAddEvent(event) {
     // check for error
     if (!response.ok) {
         // provide feedback
-        addEventResult.innerHTML = "there was a conflict with your submission";
+        addEventResult.innerText = "an event with this name already exists";
 
         // throw error
         throw new Error(response.status);
     }
 
     // provide feedback
-    addEventResult.innerHTML =
+    addEventResult.innerText =
         formData.name +
         " (" +
         formData.points +
@@ -95,10 +103,19 @@ async function submitLogEvent(event) {
     // collect submitted info
     const formData = Object.fromEntries(new FormData(event.target).entries());
 
+    let studentIndex = formData["student-dropdown"];
+    let eventIndex = formData["event-dropdown"];
+
+    const reqObj = {
+        studentFirstName: currentStudents[studentIndex].firstName,
+        studentLastName: currentStudents[studentIndex].lastName,
+        eventName: currentEvents[eventIndex].name
+    }
+
     // create a request to api
     const response = await fetch("/api/logActivity", {
         method: "POST",
-        body: JSON.stringify(formData),
+        body: JSON.stringify(reqObj),
         headers: {
             "Content-Type": "application/json",
         },
@@ -107,19 +124,19 @@ async function submitLogEvent(event) {
     // check for error
     if (!response.ok) {
         // provide feedback
-        logEventResult.innerHTML = "there was a conflict with your submission";
+        logEventResult.innerText = "there was a conflict with your submission";
 
         // throw error
         throw new Error(response.status);
     }
 
     // provide feedback
-    logEventResult.innerHTML =
-        formData.studentFirstName +
+    logEventResult.innerText =
+        reqObj.studentFirstName +
         " " +
-        formData.studentLastName +
+        reqObj.studentLastName +
         " succesfully completed " +
-        formData.eventName;
+        reqObj.eventName;
 
     // update page
     updatePage();
@@ -300,11 +317,77 @@ async function createElementsTable() {
     eventsTable.replaceChildren(table);
 }
 
+const studentDropdown = document.querySelector("#student-dropdown");
+const eventDropdown = document.querySelector("#event-dropdown");
+
+async function createDropdowns() {
+    // student dropdown
+    while (studentDropdown.firstChild) {
+        studentDropdown.removeChild(studentDropdown.firstChild);
+    }
+
+    // create a request to api
+    const response = await fetch("/api/students", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    // check for error
+    if (!response.ok) {
+        // throw error
+        throw new Error(response.status);
+    }
+
+    // get students from response
+    const students = await response.json();
+    currentStudents = students;
+    
+    students.forEach((studentObj, i) => {
+        const newOption = document.createElement("option");
+        newOption.setAttribute("value", i);
+        newOption.innerText = studentObj.firstName + " " + studentObj.lastName;
+        studentDropdown.append(newOption);
+    });
+
+    ///////////
+    while (eventDropdown.firstChild) {
+        eventDropdown.removeChild(eventDropdown.firstChild);
+    }
+
+    // create a request to api
+    const response2 = await fetch("/api/events", {
+        method: "GET",
+        headers: {
+            "Content-Type": "application/json",
+        },
+    });
+
+    // check for error
+    if (!response2.ok) {
+        // throw error
+        throw new Error(response2.status);
+    }
+
+    // get students from response
+    const events = await response2.json();
+    currentEvents = events;
+
+    events.forEach((eventObj, i) => {
+        const newOption = document.createElement("option");
+        newOption.setAttribute("value", i);
+        newOption.innerText = eventObj.name;
+        eventDropdown.append(newOption);
+    });
+}
+
 // page updater
 //   should be run every time a form is successfully submited / on page load
 async function updatePage() {
-    createStudentsTable();
-    createElementsTable();
+    // createStudentsTable();
+    // createElementsTable();
+    createDropdowns();
 }
 
 updatePage();

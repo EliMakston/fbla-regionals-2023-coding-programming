@@ -152,9 +152,7 @@ module.exports.AdminControl = class {
         // check for existing student
         const existing = this.getStudent(firstName, lastName);
         if (existing.isOk) {
-            return new Err(
-                "conflict: a student with this name already exists"
-            );
+            return new Err("conflict: a student with this name already exists");
         }
 
         // create student
@@ -166,8 +164,8 @@ module.exports.AdminControl = class {
         json.writeStudentsArrObj(studentsArrObj);
 
         return new Ok({
-            "message": "student added sucessfully"
-        })
+            message: "student added sucessfully",
+        });
     }
     addEvent(name, points) {
         // cleanse params
@@ -189,9 +187,7 @@ module.exports.AdminControl = class {
         // check for existing event
         const existing = this.getEvent(name);
         if (existing.isOk) {
-            return new Err(
-                "conflict: an event with this name already exists"
-            );
+            return new Err("conflict: an event with this name already exists");
         }
 
         // create event
@@ -203,7 +199,7 @@ module.exports.AdminControl = class {
         json.writeEventsArrObj(eventsArrObj);
 
         return new Ok({
-            "message": "event added sucessfully"
+            message: "event added sucessfully",
         });
     }
 
@@ -230,7 +226,10 @@ module.exports.AdminControl = class {
         eventName = eventName.value;
 
         // check for existing
-        const existingStudent = this.getStudent(studentFirstName, studentLastName);
+        const existingStudent = this.getStudent(
+            studentFirstName,
+            studentLastName
+        );
         const existingEvent = this.getEvent(eventName);
 
         if (!existingStudent.isOk) {
@@ -255,7 +254,7 @@ module.exports.AdminControl = class {
         json.writeStudentsArrObj(studentsArrObj);
 
         return new Ok({
-            "message": "activity logged sucessfully"
+            message: "activity logged sucessfully",
         });
     }
 };
@@ -278,9 +277,7 @@ function validateGradeLvl(gradeLvl) {
 
 function validateFirstName(firstName) {
     if (typeof firstName !== "string") {
-        return new Err(
-            "invalid query: firstName must be of type 'string'"
-        );
+        return new Err("invalid query: firstName must be of type 'string'");
     }
 
     return new Ok(firstName);
@@ -288,9 +285,7 @@ function validateFirstName(firstName) {
 
 function validateLastName(lastName) {
     if (typeof lastName !== "string") {
-        return new Err(
-            "invalid query: lastName must be of type 'string'"
-        );
+        return new Err("invalid query: lastName must be of type 'string'");
     }
 
     return new Ok(lastName);
@@ -298,9 +293,7 @@ function validateLastName(lastName) {
 
 function validateName(name) {
     if (typeof name !== "string") {
-        return new Err(
-            "invalid query: name must be of type 'string'" 
-        );
+        return new Err("invalid query: name must be of type 'string'");
     }
 
     return new Ok(name);
@@ -308,14 +301,10 @@ function validateName(name) {
 
 function validatePoints(points) {
     if (typeof points !== "number") {
-        return new Err(
-            "invalid query: points must be of type 'number'"
-        );
+        return new Err("invalid query: points must be of type 'number'");
     }
     if (points <= 0) {
-        return new Err(
-            "invalid query: points must be a value greater than 0"
-        );
+        return new Err("invalid query: points must be a value greater than 0");
     }
 
     return new Ok(points);
@@ -323,7 +312,9 @@ function validatePoints(points) {
 
 function validateStudentFirstName(studentFirstName) {
     if (typeof studentFirstName !== "string") {
-        return new Err("invalid query: studentFirstName must be of type 'string'");
+        return new Err(
+            "invalid query: studentFirstName must be of type 'string'"
+        );
     }
 
     return new Ok(studentFirstName);
