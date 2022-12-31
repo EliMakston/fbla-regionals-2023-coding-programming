@@ -11,7 +11,7 @@ global.EVENTS_DATA_FILE = "./api/data/events.json";
 const app = express();
 
 // middleware
-app.use(express.static("site/static"));
+app.use("/app", express.static("site/static"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
@@ -217,7 +217,7 @@ app.listen(3000, () => {
     console.log(
         "server running... \n" +
             "  api   http://localhost:3000/api/ \n" +
-            "  site  http://localhost:3000/ \n"
+            "  site  http://localhost:3000/app/ \n"
     );
 });
 

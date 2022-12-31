@@ -7,8 +7,8 @@
         "test": "node app.js test",
         "start": "node app.js",
         "fmt": "npx prettier -w ./",
-        "cmp": "npx sass ./site/scss/style.scss ./site/static/resources/styles/style.css",
-        "watch": "npx sass --watch ./site/scss/style.scss ./site/static/resources/styles/style.css"
+        "cmp": "npx sass ./site/scss/:./site/static/resources/styles/",
+        "watch": "npx sass --watch ./site/scss/:./site/static/resources/styles/"
     },
     "author": "Mack Rusing",
     "license": "MIT",

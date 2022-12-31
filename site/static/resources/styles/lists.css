@@ -211,75 +211,31 @@ header nav ul li a.nav-link-active:active {
   text-decoration: underline;
 }
 
-.container {
-  margin: 1rem auto;
-  padding: 1rem 1.5rem;
-  width: calc(100% - 3rem);
-  background-color: var(--bg2);
-}
-
-.form-container {
-  margin: 1rem auto;
-  padding: 1rem 1.5rem;
-  max-width: calc(100% - 3rem);
-  width: 50rem;
-  background-color: var(--bg2);
-}
-
-h2 {
-  font-size: var(--font-size-lg);
-  font-weight: bold;
-  padding: 0.5rem 0;
+h1 {
+  font-size: var(--font-size-xl);
+  font-weight: 800;
   text-align: center;
+  padding: 2rem;
+  margin: 1.5rem 0 0 0;
 }
 
-.form-result {
-  color: var(--yellow);
-  padding: 2rem 0;
-  width: fit-content;
+.table-container {
+  width: 100%;
+}
+.table-container table {
   margin: 0 auto;
-  text-align: center;
+}
+.table-container table tr th {
+  padding: 0.75rem 1.25rem;
+  font-weight: 600;
+  border: 0.2rem solid var(--bg3);
+}
+.table-container table tr td {
+  padding: 0.75rem 1.25rem;
+  border: 0.2rem solid var(--bg3);
+}
+.table-container table tr.grade-9, .table-container table tr.grade-11 {
+  background-color: var(--bg2);
 }
 
-form .input {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: fit-content;
-  gap: 1rem;
-  margin: 1.5rem auto;
-}
-form .input .field {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  gap: 2rem;
-  height: 3rem;
-}
-form .input .field label {
-  text-align: right;
-}
-form .input .field .user-input {
-  width: 20rem;
-}
-form .input .field .radio {
-  font-size: var(--font-size-sm);
-}
-form .submit {
-  text-align: center;
-}
-form .submit button {
-  border: none;
-  color: var(--bg);
-  background-color: var(--mid);
-  padding: 0.5rem 1rem;
-  text-align: center;
-}
-form .submit button:hover {
-  background-color: var(--blue);
-}
-form .submit button:active {
-  background-color: rgba(97, 175, 239, 0.6274509804);
-}
-
-/*# sourceMappingURL=style.css.map */
+/*# sourceMappingURL=lists.css.map */

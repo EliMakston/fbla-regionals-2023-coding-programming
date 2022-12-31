@@ -1,70 +1,15 @@
-// reset
+// reset & defaults
 @use "reset";
+@use "defaults";
+@use "nav";
 
-html {
-    font-size: 62.5%;
-}
-
-// variables
-:root {
-    // colors
-    --red: #e06c75;
-    --green: #98c379;
-    --yellow: #e5c07b;
-    --blue: #61afef;
-    --magenta: #c678dd;
-    --cyan: #56b6c2;
-
-    // ui
-    --bg: hsl(0, 0%, 8%);
-    --bg2: hsla(0, 0%, 100%, 2.5%);
-    --mid: hsla(0, 0%, 90%, 50%);
-    --fg: hsl(0, 0%, 90%);
-
-    // font sizes
-    // --font-size-sm: 1.2rem;
-    // --font-size-base: 1.6rem;
-    // --font-size-md: 1.8rem;
-    // --font-size-lg: 2rem;
-    // --font-size-xl: 2.2rem;
-    // @media (min-width: 768px) {
-    --font-size-sm: 1.4rem;
-    --font-size-base: 1.8rem;
-    --font-size-md: 2rem;
-    --font-size-lg: 2.6rem;
-    --font-size-xl: 2.8rem;
-    // }
-    // @media (max-width: 500px) {
-    //     --font-size-sm: 1.2rem;
-    //     --font-size-base: 1.6rem;
-    //     --font-size-md: 1.8rem;
-    //     --font-size-lg: 2.4rem;
-    //     --font-size-xl: 2.6rem;
-    // }
-}
-
-// site defaults
-body {
-    // text
-    // font-family: 'iA Writer Mono', monospace;
-    font-family: monospace;
-    text-rendering: optimizeSpeed;
-    font-size: var(--font-size-base);
-    font-weight: normal;
-    line-height: 1.25;
-    // box
-    min-height: 100vh;
-    // colors
-    color: var(--fg);
-    background-color: var(--bg);
-
-    // box
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    // justify-content: center;
-    overflow: scroll;
-}
+// body {
+//     // box
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     overflow: scroll;
+// }
 
 // containers
 .container {
