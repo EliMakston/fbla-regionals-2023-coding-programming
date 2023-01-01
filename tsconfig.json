@@ -1,0 +1,11 @@
+{
+    "extends": "@tsconfig/node18-strictest/tsconfig.json",
+
+    "include": ["app.ts", "api/**/*"],
+    "exclude": [],
+    // "files": [],
+
+    // "references": [],
+
+    "compilerOptions": {}
+}
