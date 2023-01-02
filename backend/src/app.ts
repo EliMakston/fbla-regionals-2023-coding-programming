@@ -1,9 +1,8 @@
 /*
 - not alerting on duplicate event POST req
 
-- return created obj in successful post reqs? 
+- return created obj in successful post reqs?
 - standardize messages or create better message system
-- take in all params as strings and parse and sort out errors here
 - create global vars
 - figure out res and req types
 */
@@ -32,27 +31,33 @@ app.get("/api/students", (req: any, res: any) => {
     let firstName = req.query["firstName"];
     let lastName = req.query["lastName"];
 
+    // all students
     if (queryKeys.length === 0) {
         const result = adminCtrl.getStudentsAll();
         return res.status(result.status).send(result.value);
     }
 
+    // students by grade
     if (queryKeys.length === 1 && gradeLvl) {
         const result = adminCtrl.getStudentsByGrade(gradeLvl);
         return res.status(result.status).send(result.value);
     }
 
+    // student by name
     if (queryKeys.length === 2 && firstName && lastName) {
         const result = adminCtrl.getStudentByName(firstName, lastName);
         return res.status(result.status).send(result.value);
     }
 
+    // invalid query
     return res.status(400).send({
-        message: "invalid query: check docs for help"
+        message: "invalid query: check docs for help",
     });
-})
+});
 app.post("/api/students", (req: any, res: any) => {
     console.log("recieved POST request to /api/students");
+
+    // add student
     const result = adminCtrl.addStudent(
         req.body.firstName,
         req.body.lastName,
@@ -68,22 +73,27 @@ app.get("/api/events", (req: any, res: any) => {
     const queryKeys = Object.keys(req.query);
     const name = req.query["name"];
 
+    // all events
     if (queryKeys.length === 0) {
         const result = adminCtrl.getEventsAll();
         return res.status(result.status).send(result.value);
     }
 
+    // event by name
     if (queryKeys.length === 1 && name) {
         const result = adminCtrl.getEventByName(name);
         return res.status(result.status).send(result.value);
     }
 
+    // invalid query
     return res.status(400).send({
         message: "invalid query: check docs for help",
     });
 });
 app.post("/api/events", (req: any, res: any) => {
     console.log("recieved POST request to /api/events");
+
+    // add event
     const result = adminCtrl.addEvent(req.body.name, req.body.points);
     return res.status(result.status).send(result.value);
 });
@@ -91,6 +101,8 @@ app.post("/api/events", (req: any, res: any) => {
 // logActivity endpoint
 app.post("/api/logActivity", (req: any, res: any) => {
     console.log("recieved POST request to /api/logActivity");
+
+    // log activity
     const result = adminCtrl.logActivity(
         req.body.studentFirstName,
         req.body.studentLastName,

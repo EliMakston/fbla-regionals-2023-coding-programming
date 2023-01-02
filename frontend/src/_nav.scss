@@ -3,7 +3,7 @@ header {
         // color
         background-color: var(--bg2);
         // box
-        padding: 2.0rem 1.0rem;
+        padding: 2rem 1rem;
         ul {
             // flex
             display: flex;
@@ -19,7 +19,8 @@ header {
 
             li {
                 a.nav-link {
-                    &:link, &:visited {
+                    &:link,
+                    &:visited {
                         color: var(--blue);
                     }
                     &:hover {
@@ -32,7 +33,8 @@ header {
                     }
                 }
                 a.nav-link-active {
-                    &:link, &:visited {
+                    &:link,
+                    &:visited {
                         color: var(--mid);
                     }
                     &:hover {

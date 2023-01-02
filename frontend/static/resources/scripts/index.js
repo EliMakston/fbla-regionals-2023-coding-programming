@@ -109,8 +109,8 @@ async function submitLogEvent(event) {
     const reqObj = {
         studentFirstName: currentStudents[studentIndex].firstName,
         studentLastName: currentStudents[studentIndex].lastName,
-        eventName: currentEvents[eventIndex].name
-    }
+        eventName: currentEvents[eventIndex].name,
+    };
 
     // create a request to api
     const response = await fetch("/api/logActivity", {
@@ -343,7 +343,7 @@ async function createDropdowns() {
     // get students from response
     const students = await response.json();
     currentStudents = students;
-    
+
     students.forEach((studentObj, i) => {
         const newOption = document.createElement("option");
         newOption.setAttribute("value", i);
