@@ -1,0 +1,24 @@
+- backend/
+    - src/
+        - *.ts
+    - out/
+        - app.js
+        - *.js
+    - data/
+        - *.json
+- frontend/
+    - src/
+        - *.scss
+    - static/
+        - admin/
+        - students/
+        - events/
+        - resources/
+            - styles/
+                - *.css
+                - *.css.map
+            - scripts/
+                - *.js
+            - images/
+- docs
+- 
