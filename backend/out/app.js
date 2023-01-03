@@ -6,6 +6,7 @@
 - standardize messages or create better message system
 - create global vars
 - figure out res and req types
+- figure out POST json type of gradeLvl
 */
 // modules
 const express = require("express");
