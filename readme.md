@@ -1,5 +1,36 @@
 # fbla-regionals-2023-coding-programming
 
+- [Installation](#installation)
+
+
+
+## Installation
+
+If you are already familiar with and have the command line, node, and npm installed, feel free to skip to the [Start the Server](#start-the-server) section. If not, continue reading below.
+
+This installation will use the command line. To access the command line on your machine, look for and launch an application named "Terminal", "Console", "Konsole", "Command Prompt" or something similar.
+
+### Install Node Version Manager
+
+To install Node and npm, we will use a script to make the process easier. Install the script using the command below.
+
+```
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.3/install.sh | bash
+```
+
+### Installing Node using nvm 
+
+Using the nvm script, we can now install the latest version of Node with the following command.
+
+```
+nvm install node
+```
+
+*If the terminal returns an error, try reopening the console application and inputting the command again.*
+
+
+### Start the Server
+
 Once installed, use the command below to start the server:
 
 ```
