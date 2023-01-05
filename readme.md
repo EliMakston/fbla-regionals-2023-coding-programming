@@ -64,9 +64,9 @@ By default, the API is avalible on http://localhost:3000/api.
 
 |                  | GET | POST | PUT | PATCH | DELETE |
 |------------------|-----|------|-----|-------|--------|
-| /api/students    | ✓   | ✓    |     |       |        |
-| /api/events      | ✓   | ✓    |     |       |        |
-| /api/logActivity |     | ✓    |     |       |        |
+| /api/students    | ✓   | ✓    | ✗   | ✗     | ✗      |
+| /api/events      | ✓   | ✓    | ✗   | ✗     | ✗      |
+| /api/logActivity | ✗   | ✓    | ✗   | ✗     | ✗      |
 
 For a complete overview of the API's functionality and a list of it's endpoints, check the [API Docs](./api/docs/index.md). 
 
