@@ -9,7 +9,7 @@
         "tsc": "npx tsc",
         "tsc-watch": "npx tsc --watch",
         "sass": "npx sass frontend/src/:frontend/static/resources/styles/",
-        "sass-watch": "npx sass --watch ./site/scss/:./site/static/resources/styles/"
+        "sass-watch": "npx sass --watch frontend/src/:frontend/static/resources/styles/"
     },
     "author": "Mack Rusing",
     "license": "MIT",

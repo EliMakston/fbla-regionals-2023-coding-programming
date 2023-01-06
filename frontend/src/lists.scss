@@ -10,6 +10,21 @@ h1 {
     margin: 1.5rem 0 0 0;
 }
 
+.pick-winners {
+    text-align: center;
+    color: var(--blue);
+    padding: 1.5rem;
+
+    &:hover {
+        text-decoration: underline;
+    }
+
+    &:active {
+        color: var(--magenta);
+        text-decoration: underline;
+    }
+}
+
 .table-container {
     // box
     width: 100%;
