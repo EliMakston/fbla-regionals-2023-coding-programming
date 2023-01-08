@@ -10,18 +10,30 @@ h1 {
     margin: 1.5rem 0 0 0;
 }
 
+p {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+}
+
 .pick-winners {
     text-align: center;
-    color: var(--blue);
-    padding: 1.5rem;
+    color: var(--bg);
+    padding: 1rem;
+    text-align: center;
+    margin: 0 auto;
+
+    background-color: var(--blue);
 
     &:hover {
-        text-decoration: underline;
+        background-color: var(--blue);
+        color: var(--bg);
     }
 
     &:active {
-        color: var(--magenta);
-        text-decoration: underline;
+        background-color: var(--magenta);
+        color: var(--bg);
     }
 }
 
@@ -53,7 +65,15 @@ h1 {
                 background-color: var(--bg2);
             }
 
-            // .grade-10, .grade-12 {}
+            &.winner {
+                background-color: var(--yellow);
+                color: var(--bg);
+            }
+
+            &.point-leader {
+                background-color: var(--blue);
+                color: var(--bg);
+            }
         }
     }
 }

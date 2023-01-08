@@ -219,17 +219,28 @@ h1 {
   margin: 1.5rem 0 0 0;
 }
 
+p {
+  max-width: 50rem;
+  margin: 0 auto;
+  padding: 1rem;
+  text-align: center;
+}
+
 .pick-winners {
   text-align: center;
-  color: var(--blue);
-  padding: 1.5rem;
+  color: var(--bg);
+  padding: 1rem;
+  text-align: center;
+  margin: 0 auto;
+  background-color: var(--blue);
 }
 .pick-winners:hover {
-  text-decoration: underline;
+  background-color: var(--blue);
+  color: var(--bg);
 }
 .pick-winners:active {
-  color: var(--magenta);
-  text-decoration: underline;
+  background-color: var(--magenta);
+  color: var(--bg);
 }
 
 .table-container {
@@ -249,6 +260,14 @@ h1 {
 }
 .table-container table tr.grade-9, .table-container table tr.grade-11 {
   background-color: var(--bg2);
+}
+.table-container table tr.winner {
+  background-color: var(--yellow);
+  color: var(--bg);
+}
+.table-container table tr.point-leader {
+  background-color: var(--blue);
+  color: var(--bg);
 }
 
 /*# sourceMappingURL=lists.css.map */
