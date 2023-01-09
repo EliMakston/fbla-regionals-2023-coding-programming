@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+
+# compile
+npx tsc
+npx sass frontend/src/:frontend/static/resources/styles/
+
+# format
+npx prettier -w ./

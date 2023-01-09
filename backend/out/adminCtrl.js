@@ -46,11 +46,18 @@ module.exports.getStudentsAll = () => {
 };
 module.exports.getStudentsByGrade = (gradeLvl) => {
     const parsedGradeLvl = parseInt(gradeLvl);
-    if (parsedGradeLvl !== 9 &&
+    if (
+        parsedGradeLvl !== 9 &&
         parsedGradeLvl !== 10 &&
         parsedGradeLvl !== 11 &&
-        parsedGradeLvl !== 12) {
-        return newErr(400, newMessageObj("gradeLvl must be of type 'number' and have the value 9, 10, 11, or 12"));
+        parsedGradeLvl !== 12
+    ) {
+        return newErr(
+            400,
+            newMessageObj(
+                "gradeLvl must be of type 'number' and have the value 9, 10, 11, or 12"
+            )
+        );
     }
     const studentsInGrade = readStudentsJson().filter((studentObj) => {
         return studentObj.gradeLvl === parsedGradeLvl;
@@ -59,11 +66,16 @@ module.exports.getStudentsByGrade = (gradeLvl) => {
 };
 module.exports.getStudentByName = (firstName, lastName) => {
     const foundStudent = readStudentsJson().find((studentObj) => {
-        return (studentObj.firstName === firstName &&
-            studentObj.lastName === lastName);
+        return (
+            studentObj.firstName === firstName &&
+            studentObj.lastName === lastName
+        );
     });
     if (!foundStudent) {
-        return newErr(404, newMessageObj("a student with this name does not exist yet"));
+        return newErr(
+            404,
+            newMessageObj("a student with this name does not exist yet")
+        );
     }
     return newOk(200, foundStudent);
 };
@@ -75,20 +87,33 @@ module.exports.getEventByName = (name) => {
         return eventObj.name === name;
     });
     if (!foundEvent) {
-        return newErr(404, newMessageObj("an event with this name does not exist yet"));
+        return newErr(
+            404,
+            newMessageObj("an event with this name does not exist yet")
+        );
     }
     return newOk(200, foundEvent);
 };
 module.exports.addStudent = (firstName, lastName, gradeLvl) => {
     const parsedGradeLvl = parseInt(gradeLvl);
     if (module.exports.getStudentByName(firstName, lastName).ok) {
-        return newErr(409, newMessageObj("a student with this name already exists"));
+        return newErr(
+            409,
+            newMessageObj("a student with this name already exists")
+        );
     }
-    if (parsedGradeLvl !== 9 &&
+    if (
+        parsedGradeLvl !== 9 &&
         parsedGradeLvl !== 10 &&
         parsedGradeLvl !== 11 &&
-        parsedGradeLvl !== 12) {
-        return newErr(400, newMessageObj("gradeLvl must be of type 'number' and have the value 9, 10, 11, or 12"));
+        parsedGradeLvl !== 12
+    ) {
+        return newErr(
+            400,
+            newMessageObj(
+                "gradeLvl must be of type 'number' and have the value 9, 10, 11, or 12"
+            )
+        );
     }
     const studentsJson = readStudentsJson();
     studentsJson.push({
@@ -103,10 +128,18 @@ module.exports.addStudent = (firstName, lastName, gradeLvl) => {
 module.exports.addEvent = (name, points) => {
     const parsedPoints = parseInt(points);
     if (typeof parsedPoints !== "number") {
-        return newErr(400, newMessageObj("gradeLvl must be of type 'number' and have the value 9, 10, 11, or 12"));
+        return newErr(
+            400,
+            newMessageObj(
+                "gradeLvl must be of type 'number' and have the value 9, 10, 11, or 12"
+            )
+        );
     }
     if (module.exports.getEventByName(name).ok) {
-        return newErr(409, newMessageObj("an event with this name already exists"));
+        return newErr(
+            409,
+            newMessageObj("an event with this name already exists")
+        );
     }
     const eventsJson = readEventsJson();
     eventsJson.push({
@@ -116,17 +149,27 @@ module.exports.addEvent = (name, points) => {
     return newOk(201, newMessageObj("new event created"));
 };
 module.exports.logActivity = (studentFirstName, studentLastName, eventName) => {
-    if (!module.exports.getStudentByName(studentFirstName, studentLastName).ok) {
-        return newErr(404, newMessageObj("a student with this name does not exist"));
+    if (
+        !module.exports.getStudentByName(studentFirstName, studentLastName).ok
+    ) {
+        return newErr(
+            404,
+            newMessageObj("a student with this name does not exist")
+        );
     }
     let event = module.exports.getEventByName(eventName);
     if (!event.ok) {
-        return newErr(404, newMessageObj("an event with this name does not exist"));
+        return newErr(
+            404,
+            newMessageObj("an event with this name does not exist")
+        );
     }
     const studentsJson = readStudentsJson();
     const student = studentsJson.find((studentObj) => {
-        return (studentObj.firstName === studentFirstName,
-            studentObj.lastName === studentLastName);
+        return (
+            studentObj.firstName === studentFirstName,
+            studentObj.lastName === studentLastName
+        );
     });
     student.points += event.value.points;
     writeStudentsJson(studentsJson);

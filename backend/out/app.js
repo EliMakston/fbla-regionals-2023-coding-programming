@@ -48,7 +48,11 @@ app.get("/api/students", (req, res) => {
 app.post("/api/students", (req, res) => {
     console.log("recieved POST request to /api/students");
     // add student
-    const result = adminCtrl.addStudent(req.body.firstName, req.body.lastName, req.body.gradeLvl);
+    const result = adminCtrl.addStudent(
+        req.body.firstName,
+        req.body.lastName,
+        req.body.gradeLvl
+    );
     return res.status(result.status).send(result.value);
 });
 // events endpoint
@@ -81,12 +85,18 @@ app.post("/api/events", (req, res) => {
 app.post("/api/logActivity", (req, res) => {
     console.log("recieved POST request to /api/logActivity");
     // log activity
-    const result = adminCtrl.logActivity(req.body.studentFirstName, req.body.studentLastName, req.body.eventName);
+    const result = adminCtrl.logActivity(
+        req.body.studentFirstName,
+        req.body.studentLastName,
+        req.body.eventName
+    );
     return res.status(result.status).send(result.value);
 });
 // listen for requests
 app.listen(PORT, () => {
-    console.log("server running... \n" +
-        `  api   http://localhost:${PORT}/api/ \n` +
-        `  site  http://localhost:${PORT}/app/ \n`);
+    console.log(
+        "server running... \n" +
+            `  api   http://localhost:${PORT}/api/ \n` +
+            `  site  http://localhost:${PORT}/app/ \n`
+    );
 });
