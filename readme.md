@@ -1,13 +1,21 @@
-# fbla-regionals-2023-coding-programming
+# FBLA Regionals 2023 Coding & Programming
+
+![total lines](https://img.shields.io/tokei/lines/github/mackrusing/fbla-regionals-2023-coding-programming)
+![current version](https://img.shields.io/github/package-json/v/mackrusing/fbla-regionals-2023-coding-programming)
+![language: TypeScript](https://img.shields.io/badge/language-TypeScript-blue)
+![language: Sass](https://img.shields.io/badge/language-Sass-ff69b4)
 
 -   [Installation](#installation)
 -   [API](#api)
--   [Web App](#web-app)
+-   [Web app](#web-app)
+-   [Credits](#credits)
+
+Complete documentation for the API can be found [here](./docs/index.md).
 
 ## Installation
 
 If you are already familiar with and have the command line, node, and npm
-installed, feel free to skip to the [Start the Server](#4-start-the-server)
+installed, feel free to skip to the "[start the server](#4-start-the-server)"
 section. If not, continue reading below.
 
 This installation will use the command line. To access the command line on your
@@ -50,7 +58,7 @@ Now, move into the newly created folder
 cd fbla-regionals-2023-coding-programming
 ```
 
-### 4. Start the Server
+### 4. Start the server
 
 Once installed and in the project directory, use the command below to start the
 server.
@@ -79,18 +87,18 @@ By default, the API is avalible on http://localhost:3000/api.
 | /api/logActivity | ✗   | ✓    | ✗   | ✗     | ✗      |
 
 For a complete overview of the API's functionality and a list of it's endpoints,
-check the [API Docs](./api/docs/index.md).
+check the [API Docs](./docs/index.md).
 
-## Web App
+## Web app
 
-The Web Application gives administrators and students an easy way to track
+The Web application gives administrators and students an easy way to track
 participation in school events. The application consists of forms (for adding
 students, events, and completed activities) and reports of all students and
 events.
 
 By default, it is avalible on http://localhost:3000/app.
 
-### Site Map
+### Site map
 
 -   [/app](http://localhost:3000/app): home page
 -   [/app/admin](http://localhost:3000/app/admin): page for administrators to
@@ -99,3 +107,9 @@ By default, it is avalible on http://localhost:3000/app.
     events
 -   [/app/students](http://localhost:3000/app/students): a complete report of
     students and their logged points, organized by grade
+
+## Credits
+
+Designed and created by Mack Rusing and Brooklin Curtis.
+
+Built with TypeScript, JavaScript, Sass, and HTML.

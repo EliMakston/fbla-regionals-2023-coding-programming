@@ -1,5 +1,7 @@
 # Students Endpoint
 
+[< back](./index.md)
+
 Create and read student data.
 
 -   [GET `/api/students`](#get-apistudents)
@@ -32,3 +34,7 @@ A request of this method to this endpoint with a valid query of `firstName` and
 | `gradeLvl`  | a grade level (9, 10, 11, or 12) | 9             | yes      |
 
 ## POST `/api/students`
+
+Add a new student.
+
+> Full documentation coming soon
