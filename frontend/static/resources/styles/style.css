@@ -1,0 +1,287 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+body {
+    line-height: 1;
+}
+
+ul,
+ol {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: "";
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+img {
+    max-width: 100%;
+    display: block;
+}
+
+input,
+button,
+textarea,
+select {
+    font: inherit;
+}
+
+a:link,
+a:visited,
+a:hover,
+a:active {
+    color: inherit;
+    text-decoration: none;
+}
+
+html {
+    font-size: 62.5%;
+}
+
+:root {
+    --red: #e06c75;
+    --green: #98c379;
+    --yellow: #e5c07b;
+    --blue: #61afef;
+    --magenta: #c678dd;
+    --cyan: #56b6c2;
+    --bg: hsl(0, 0%, 8%);
+    --bg2: hsl(0, 0%, 12%);
+    --bg3: hsl(0, 0%, 16%);
+    --mid: hsla(0, 0%, 90%, 50%);
+    --fg: hsl(0, 0%, 90%);
+    --font-size-sm: 1.4rem;
+    --font-size-base: 1.8rem;
+    --font-size-md: 2rem;
+    --font-size-lg: 2.6rem;
+    --font-size-xl: 2.8rem;
+}
+
+body {
+    font-family: monospace;
+    text-rendering: optimizeSpeed;
+    font-size: var(--font-size-base);
+    font-weight: normal;
+    line-height: 1.25;
+    min-height: 100vh;
+    color: var(--fg);
+    background-color: var(--bg);
+}
+
+header nav {
+    background-color: var(--bg2);
+    padding: 2rem 1rem;
+}
+header nav ul {
+    display: flex;
+    flex-direction: row;
+    gap: 1.5rem;
+    align-items: center;
+    justify-items: center;
+    justify-content: center;
+    align-content: center;
+    font-size: var(--font-size-md);
+}
+header nav ul li a.nav-link:link,
+header nav ul li a.nav-link:visited {
+    color: var(--blue);
+}
+header nav ul li a.nav-link:hover {
+    color: var(--blue);
+    text-decoration: underline;
+}
+header nav ul li a.nav-link:active {
+    color: var(--magenta);
+    text-decoration: underline;
+}
+header nav ul li a.nav-link-active:link,
+header nav ul li a.nav-link-active:visited {
+    color: var(--mid);
+}
+header nav ul li a.nav-link-active:hover {
+    color: var(--mid);
+    text-decoration: underline;
+}
+header nav ul li a.nav-link-active:active {
+    color: var(--magenta);
+    text-decoration: underline;
+}
+
+.container {
+    margin: 1rem auto;
+    padding: 1rem 1.5rem;
+    width: calc(100% - 3rem);
+    background-color: var(--bg2);
+}
+
+.form-container {
+    margin: 1rem auto;
+    padding: 1rem 1.5rem;
+    max-width: calc(100% - 3rem);
+    width: 50rem;
+    background-color: var(--bg2);
+}
+
+h2 {
+    font-size: var(--font-size-lg);
+    font-weight: bold;
+    padding: 0.5rem 0;
+    text-align: center;
+}
+
+.form-result {
+    color: var(--yellow);
+    padding: 2rem 0;
+    width: fit-content;
+    margin: 0 auto;
+    text-align: center;
+}
+
+form .input {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    width: fit-content;
+    gap: 1rem;
+    margin: 1.5rem auto;
+}
+form .input .field {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 2rem;
+    height: 3rem;
+}
+form .input .field label {
+    text-align: right;
+}
+form .input .field .user-input {
+    width: 20rem;
+}
+form .input .field .radio {
+    font-size: var(--font-size-sm);
+}
+form .submit {
+    text-align: center;
+}
+form .submit button {
+    border: none;
+    color: var(--bg);
+    background-color: var(--mid);
+    padding: 0.5rem 1rem;
+    text-align: center;
+}
+form .submit button:hover {
+    background-color: var(--blue);
+}
+form .submit button:active {
+    background-color: rgba(97, 175, 239, 0.6274509804);
+}
+
+/*# sourceMappingURL=style.css.map */

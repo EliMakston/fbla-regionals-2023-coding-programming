@@ -1,0 +1,79 @@
+@use "reset";
+@use "defaults";
+@use "nav";
+
+h1 {
+    font-size: var(--font-size-xl);
+    font-weight: 800;
+    text-align: center;
+    padding: 2rem;
+    margin: 1.5rem 0 0 0;
+}
+
+p {
+    max-width: 50rem;
+    margin: 0 auto;
+    padding: 1rem;
+    text-align: center;
+}
+
+.pick-winners {
+    text-align: center;
+    color: var(--bg);
+    padding: 1rem;
+    text-align: center;
+    margin: 0 auto;
+
+    background-color: var(--blue);
+
+    &:hover {
+        background-color: var(--blue);
+        color: var(--bg);
+    }
+
+    &:active {
+        background-color: var(--magenta);
+        color: var(--bg);
+    }
+}
+
+.table-container {
+    // box
+    width: 100%;
+
+    table {
+        // box
+        margin: 0 auto;
+        tr {
+            th {
+                // box
+                padding: 0.75rem 1.25rem;
+                // text
+                font-weight: 600;
+                // border
+                border: 0.2rem solid var(--bg3);
+            }
+            td {
+                // box
+                padding: 0.75rem 1.25rem;
+                // border
+                border: 0.2rem solid var(--bg3);
+            }
+
+            &.grade-9,
+            &.grade-11 {
+                background-color: var(--bg2);
+            }
+
+            &.winner {
+                background-color: var(--yellow);
+                color: var(--bg);
+            }
+
+            &.point-leader {
+                background-color: var(--blue);
+                color: var(--bg);
+            }
+        }
+    }
+}

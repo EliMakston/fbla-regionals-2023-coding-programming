@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <!-- metadata -->
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+        <!-- url defaults -->
+        <base href="/app/" />
+
+        <!-- info -->
+        <title>Web App | Students</title>
+
+        <!-- stylesheets -->
+        <link rel="stylesheet" href="resources/styles/lists.css" />
+
+        <!-- scripts -->
+        <script defer src="resources/scripts/students.js"></script>
+    </head>
+    <body>
+        <!-- header  -->
+        <header>
+            <nav>
+                <ul>
+                    <li><a href="admin" class="nav-link">Admin</a></li>
+                    <li>
+                        <a href="students" class="nav-link-active">Students</a>
+                    </li>
+                    <li><a href="events" class="nav-link">Events</a></li>
+                </ul>
+            </nav>
+        </header>
+
+        <!-- main -->
+        <main>
+            <!-- title -->
+            <h1>Students</h1>
+
+            <!-- pick winner -->
+            <p>
+                Point winner is shown in blue. <br />
+                Random winners are shown in yellow.
+            </p>
+            <a class="pick-winners">Draw Winners</a>
+
+            <!-- students table -->
+            <div id="students-table-div" class="table-container"></div>
+        </main>
+    </body>
+</html>
