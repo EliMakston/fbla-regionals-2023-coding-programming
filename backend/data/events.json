@@ -1,9 +1,42 @@
 [
-    { "name": "Rugby Home Game 1", "points": 5 },
-    { "name": "Rugby Home Game 2", "points": 5 },
-    { "name": "Band Concert", "points": 10 },
-    { "name": "Movie Night", "points": 5 },
-    { "name": "Movie Night 2", "points": 100 },
-    { "name": "Cool Thing", "points": 11 },
-    { "name": "Events", "points": 112 }
+    {
+        "name": "Homecoming Game",
+        "points": 10
+    },
+    {
+        "name": "Soccer Game",
+        "points": 5
+    },
+    {
+        "name": "Football Game",
+        "points": 5
+    },
+    {
+        "name": "Basketball Game",
+        "points": 5
+    },
+    {
+        "name": "Baseball Game",
+        "points": 5
+    },
+    {
+        "name": "Spring Art Fair",
+        "points": 15
+    },
+    {
+        "name": "Spring Band Concert",
+        "points": 5
+    },
+    {
+        "name": "Fall Play",
+        "points": 10
+    },
+    {
+        "name": "Career Fair",
+        "points": 20
+    },
+    {
+        "name": "Local Buisness Night",
+        "points": 10
+    }
 ]
